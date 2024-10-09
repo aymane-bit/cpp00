@@ -2,13 +2,13 @@
 CXX = c++
 
 # Compiler flags
-CXXFLAGS = -Wall -Wextra -Werror
+CXXFLAGS = -Wall -Wextra -Werror -g
 
 # Target executable name
 TARGET = megaphone
 
 # Source file
-SRC = megaphone.cpp
+SRC = megaphone.cpp getters.cpp parsing.cpp
 
 # Rule to build the target
 all: $(TARGET)
