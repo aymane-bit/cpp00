@@ -6,7 +6,7 @@
 /*   By: akajjou <akajjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 02:57:24 by akajjou           #+#    #+#             */
-/*   Updated: 2024/10/09 02:58:05 by akajjou          ###   ########.fr       */
+/*   Updated: 2024/10/11 20:35:10 by akajjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,11 @@ void    name_parser(std::string *Fname, std::string *Lname, std::string *Nname)
     }
     else if (Nname->length() != 10)
         name__parser_helper(Nname);
-}   
+}
+
+void    ft_exit()
+{
+    std::cout << RED << "\nExiting phonebook..." << RESET << std::endl;
+    std::cout << GREEN << "Goodbye!" << RESET << std::endl;
+    exit(0);
+}

@@ -6,8 +6,18 @@
 #include <string>
 #include <cctype> 
 
+#define RESET   "\033[0m"
+#define GREEN   "\033[32m"
+#define YELLOW  "\033[33m"
+#define BLUE    "\033[34m"
+#define MAGENTA "\033[35m"
+#define CYAN    "\033[36m"
+#define RED     "\033[31m"
+#define BOLD   "\033[1m"
+
 #define MAX_CONTACTS 8
 
+void    ft_exit();
 void    name__parser_helper(std::string *name);
 void    name_parser(std::string *Fname, std::string *Lname, std::string *Nname);
 

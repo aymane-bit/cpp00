@@ -6,7 +6,7 @@
 /*   By: akajjou <akajjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 22:11:48 by akajjou           #+#    #+#             */
-/*   Updated: 2024/10/09 22:58:40 by akajjou          ###   ########.fr       */
+/*   Updated: 2024/10/11 21:14:36 by akajjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,11 @@ void PhoneBook::add()
     contact[tmp].set_phonenumber();
     contact[tmp].set_darkestsecret();
     index++;
-    std::cout << "Contact added successfully" << "["<< tmp + 1 
-    << "/8]" << std::endl;
+    std::cout << GREEN << " ___________________________________________\n" << RESET;
+    std::cout << GREEN << "|                                           |\n" << RESET;
+    std::cout << GREEN << "|" << RESET << BOLD << "      Contact added successfully" << "["<<  CYAN << tmp + 1 
+    << RESET << "/8]      " << GREEN "|" << RESET << std::endl;
+    std::cout << GREEN << "|___________________________________________|\n" << RESET;
     
 }
 
@@ -56,7 +59,7 @@ void    PhoneBook::print_contacts()
     if (tmp_index == 0)
     {
         std::cout << "|-------------------------------------------|\n";
-        std::cout << "No contacts to show" << std::endl;
+        std::cout << RED << "No contacts to show" << RESET << std::endl;
         return ;
     }
     else if (tmp_index >= 8)
@@ -99,32 +102,38 @@ void    PhoneBook::search()
         return ;
     if (index >= 8)
         tmp_index = 8;
-    std::cout << "Enter index ->";
-    std::getline(std::cin, input);
-    if (!isAllDigits(input) || std::cin.eof())
+    while (1)
     {
-        std::cout << "Invalid index\n" << std::endl;
-        return ;
+        std::cout << GREEN << "\nEnter index -> " << RESET;
+        std::getline(std::cin, input);
+        if (std::cin.eof())
+            ft_exit();
+        if (!isAllDigits(input))
+        {
+            std::cout << RED << "\nInvalid index" << RESET << std::endl;
+            continue;
+        }
+        index2 = std::stoi(input);
+        index2--;
+        if (index2 < 0 || index2 >= tmp_index)
+        {
+            std::cout << RED << "\nInvalid index" << RESET << std::endl;
+            continue;
+        }
+        break;
     }
-    index2 = std::stoi(input);
-    index2--;
-    if (index2 < 0 || index2 >= tmp_index)
-    {
-        std::cout << "Invalid index" << std::endl;
-        return ;
-    }
-    std::cout << "First Name ->" << contact[index2].get_firstname() << std::endl;
-    std::cout << "Last Name ->" << contact[index2].get_lastname() << std::endl;
-    std::cout << "Nick Name ->" << contact[index2].get_nickname() << std::endl;
-    std::cout << "Phone Number ->" << contact[index2].get_phonenumber() << std::endl;
-    std::cout << "Darkest Secret ->" << contact[index2].get_darkestsecret() << std::endl;
+    std::cout << "\nFirst Name     ->  " << BOLD << contact[index2].get_firstname() << RESET << std::endl;
+    std::cout << "Last Name      ->  " << BOLD << contact[index2].get_lastname()  << RESET<< std::endl;
+    std::cout << "Nick Name      ->  " << BOLD << contact[index2].get_nickname()  << RESET<< std::endl;
+    std::cout << "Phone Number   ->  " << BOLD << contact[index2].get_phonenumber() << RESET << std::endl;
+    std::cout << "Darkest Secret ->  " << BOLD << contact[index2].get_darkestsecret() << RESET << std::endl;
 }
 
 void    search(PhoneBook phone)
 {
     std::cout << "____________________________________________\n";
     std::cout << "|          |          |          |          |\n";
-    std::cout << "|  index   |first name|last name | nickname |\n";
+    std::cout << "|     index|first name| last name|  nickname|\n";
     std::cout << "|----------|----------|----------|----------|\n";
     phone.print_contacts();
     phone.search();
@@ -147,7 +156,7 @@ int main()
         else if (read_line == "SEARCH")
             search(phone);
     }
-    std::cout << "\nSEE YOU NEXT TIME \n" << std::endl;
+    ft_exit();
     return 0;
     
 }
