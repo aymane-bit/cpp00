@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <string>
+#include <cctype> 
 
 #define MAX_CONTACTS 8
 
@@ -46,7 +47,6 @@ class   PhoneBook
         void add();
         void search();
         void print_contacts();
-
 };
 
 

@@ -6,7 +6,7 @@
 /*   By: akajjou <akajjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 22:11:48 by akajjou           #+#    #+#             */
-/*   Updated: 2024/10/09 03:15:15 by akajjou          ###   ########.fr       */
+/*   Updated: 2024/10/09 22:58:40 by akajjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,39 +24,47 @@ Contact::Contact()
 PhoneBook::PhoneBook()
 {
     index = 0;
+    std::cout << "WELCOME TO PHONEBOOK" << std::endl;
 }
+
 
 void PhoneBook::add()
 {
-    if (index == MAX_CONTACTS)
-        index = 0;
-    contact[index].set_firstname();
-    contact[index].set_lastname();
-    contact[index].set_nickname();
-    contact[index].set_phonenumber();
-    contact[index].set_darkestsecret();
+    int tmp  = index;
+    if (index >= MAX_CONTACTS)
+        tmp %= 8;
+    contact[tmp].set_firstname();
+    contact[tmp].set_lastname();
+    contact[tmp].set_nickname();
+    contact[tmp].set_phonenumber();
+    contact[tmp].set_darkestsecret();
     index++;
-    std::cout << "Contact added successfully" << std::endl;
+    std::cout << "Contact added successfully" << "["<< tmp + 1 
+    << "/8]" << std::endl;
     
 }
 
 void    PhoneBook::print_contacts()
 {
     int i = 0;
+    int PrintIndex = 1;
+    int tmp_index = index;
     std::string Fname;
     std::string Lname;
     std::string Nname;
 
-    if (index == 0)
+    if (tmp_index == 0)
     {
         std::cout << "|-------------------------------------------|\n";
         std::cout << "No contacts to show" << std::endl;
         return ;
     }
-    while (i < index)
+    else if (tmp_index >= 8)
+        tmp_index = 8;
+    while (i < tmp_index)
     {
         std::cout << "|         ";
-        std::cout << i;
+        std::cout << PrintIndex++;
         std::cout << "|";
         Fname = contact[i].get_firstname();
         Lname = contact[i].get_lastname();
@@ -69,15 +77,38 @@ void    PhoneBook::print_contacts()
     std::cout << "|-------------------------------------------|\n";
 }
 
+bool isAllDigits(const std::string& str) {
+    if (str.empty()) {
+        return false;
+    }
+
+    for (size_t i = 0; i < str.length(); ++i) {
+        if (str[i] < '0' || str[i] > '9') {
+            return false;
+        }
+    }
+    return true;
+}
+
 void    PhoneBook::search()
 {
+    int index2;
+    int tmp_index = index;
+    std::string input;
     if (index == 0) 
         return ;
-    int index2;
+    if (index >= 8)
+        tmp_index = 8;
     std::cout << "Enter index ->";
-    std::cin >> index2;
-    index2++;
-    if (index2 < 0 || index2 > index)
+    std::getline(std::cin, input);
+    if (!isAllDigits(input) || std::cin.eof())
+    {
+        std::cout << "Invalid index\n" << std::endl;
+        return ;
+    }
+    index2 = std::stoi(input);
+    index2--;
+    if (index2 < 0 || index2 >= tmp_index)
     {
         std::cout << "Invalid index" << std::endl;
         return ;
@@ -88,7 +119,6 @@ void    PhoneBook::search()
     std::cout << "Phone Number ->" << contact[index2].get_phonenumber() << std::endl;
     std::cout << "Darkest Secret ->" << contact[index2].get_darkestsecret() << std::endl;
 }
-
 
 void    search(PhoneBook phone)
 {
@@ -106,27 +136,18 @@ int main()
     PhoneBook phone;
     std::string read_line;
     
-
-    while (read_line != "EXIT" && std::cin.good())
+    while (read_line != "EXIT")
     {
-        std::cout << "PLEAS ENTER A COMMENDE ->";
+        std::cout << "\nPLEAS ENTER A COMMENDE (ADD,SEARCH,EXIT) ->";
         std::getline(std::cin,read_line);
+        if (std::cin.eof())
+            break;
         if (read_line == "ADD")
             phone.add();
-        else if (read_line == "PRINT")
-            phone.print_contacts();
         else if (read_line == "SEARCH")
             search(phone);
-        else if (read_line == "EXIT")
-            break;            
     }
-    
-
-
-
-
-
-
-
+    std::cout << "\nSEE YOU NEXT TIME \n" << std::endl;
+    return 0;
     
 }
