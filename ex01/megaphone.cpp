@@ -6,7 +6,7 @@
 /*   By: akajjou <akajjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 22:11:48 by akajjou           #+#    #+#             */
-/*   Updated: 2024/10/11 21:14:36 by akajjou          ###   ########.fr       */
+/*   Updated: 2024/10/11 23:06:41 by akajjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void    PhoneBook::search()
         tmp_index = 8;
     while (1)
     {
-        std::cout << GREEN << "\nEnter index -> " << RESET;
+        std::cout << GREEN << "\nEnter the contact index -> " << RESET;
         std::getline(std::cin, input);
         if (std::cin.eof())
             ft_exit();

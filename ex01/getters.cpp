@@ -6,7 +6,7 @@
 /*   By: akajjou <akajjou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 23:43:04 by akajjou           #+#    #+#             */
-/*   Updated: 2024/10/11 21:12:33 by akajjou          ###   ########.fr       */
+/*   Updated: 2024/10/11 23:08:35 by akajjou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ void Contact::set_lastname()
 {
     while (1)
     {
-        std::cout << "Enter Last Name ->";
+        std::cout << "Enter " << BOLD << FirstName << RESET << " Last Name ->";
         std::getline(std::cin, LastName);
         if (std::cin.eof())
             ft_exit();
-        if (FirstName.empty())
+        if (LastName.empty())
             std::cout << RED << "last Name can't be empty" << RESET << std::endl;
         else
             break;
@@ -71,11 +71,11 @@ void Contact::set_nickname()
 {
     while (1)
     {
-        std::cout << "Enter Nick Name ->";
+        std::cout << "Enter " << BOLD << FirstName << " " << LastName << RESET << " Nick Name ->";
         std::getline(std::cin, NickName);
         if (std::cin.eof())
             ft_exit();
-        if (FirstName.empty())
+        if (NickName.empty())
             std::cout << RED << "NickName can't be empty" << RESET << std::endl;
         else
             break;
@@ -86,11 +86,11 @@ void Contact::set_phonenumber()
 {
     while (1)
     {
-        std::cout << "Enter Phone Number ->";
+        std::cout << "Enter "<< BOLD << FirstName << " " << LastName << RESET <<  " Phone Number ->";
         std::getline(std::cin, PhoneNumber);
         if (std::cin.eof())
             ft_exit();
-        if (FirstName.empty())
+        if (PhoneNumber.empty())
             std::cout << RED << "Phone Number can't be empty" << RESET << std::endl;
         else
             break;
@@ -101,11 +101,11 @@ void Contact::set_darkestsecret()
 {
     while (1)
     {
-        std::cout << "Enter Darkest Secret ->";
+        std::cout << "Enter " << BOLD << FirstName << " " << LastName << RESET << " Darkest Secret ->";
         std::getline(std::cin, DarkSecret);
         if (std::cin.eof())
             ft_exit();
-        if (FirstName.empty())
+        if (DarkSecret.empty())
             std::cout << RED << "D.S can't be empty" << RESET << std::endl;
         else
             break;
